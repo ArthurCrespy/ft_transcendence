@@ -3,6 +3,7 @@ import { DEBUG, navigateTo } from '../../app.js';
 import { navigationBar } from './navigation.js';
 
 export function settingsView(container) {
+    container.classList.add('settings-container');
     container.innerHTML = '';
 
     // Récupérer les infos de l'utilisateur depuis le backend
@@ -394,7 +395,7 @@ export function settingsView(container) {
         // Bouton de soumission
         const submitButtonModify1 = document.createElement('button');
         submitButtonModify1.type = 'submit';
-        submitButtonModify1.className = 'btn btn-primary w-100';
+        submitButtonModify1.className = 'btn btn-primary w-100 Buttonselem';
         submitButtonModify1.textContent = 'Submit';
         formModify1.appendChild(submitButtonModify1);
 
@@ -444,10 +445,15 @@ export function settingsView(container) {
         modalParamModifyBody.appendChild(formModify2);
 
 
-        // Champ de la taille de la police
-        const labelFontSize = document.createElement('label');
-        labelFontSize.className = 'form-label';
-        // labelFontSize.htmlFor = 'font-size';
+
+    const PoliceContener = document.createElement('div');
+    PoliceContener.className = 'PoliceContener';
+
+    AccessibilityForm.appendChild(PoliceContener);
+    // Champ de la taille de la police
+    const labelFontSize = document.createElement('label');
+    labelFontSize.className = 'form-label';
+    // labelFontSize.htmlFor = 'font-size';
         labelFontSize.textContent = 'Font size';
         formModify2.appendChild(labelFontSize);
 
@@ -477,14 +483,18 @@ export function settingsView(container) {
         // });
         // formModify2.appendChild(exampleElement);
 
-
 //     const LanguageContenerSettings = document.createElement('div');
 //     LanguageContenerSettings.className = 'LanguageContenerSettings';
 
-//     accessibilityBody.appendChild(LanguageContenerSettings);
+
+    const LanguageContenerSettings = document.createElement('div');
+    LanguageContenerSettings.className = 'LanguageContenerSettings';
+
+    accessibilityBody.appendChild(LanguageContenerSettings);
+    // accessibilityBody.appendChild(LanguageContenerSettings);
 //     // Champ de la langue
 //     const labelLanguage = document.createElement('label');
-//     labelLanguage.className = 'form-label labelLanguageSettings';
+//    labelLanguage.className = 'form-label labelLanguageSettings';
 //     labelLanguage.htmlFor = 'language';
 //     labelLanguage.textContent = 'Langue';
 
