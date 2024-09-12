@@ -1,0 +1,131 @@
+[
+  {
+    "model": "api.user_site",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$31x3E9gkMYg37JV5CXD1a8$5FUPf9EkQWE1WHKNgWegBxJUOy1HapEovNN+0rWrMnY=",
+      "last_login": "2024-09-12T11:52:06.515Z",
+      "is_superuser": false,
+      "username": "Edouard",
+      "first_name": "",
+      "last_name": "",
+      "email": "Edouard@Edouard.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-12T09:42:25.615Z",
+      "nickname": "XxDarkEdouardxX",
+      "created_at": "2024-09-12T09:42:25.615Z",
+      "status": "online",
+      "avatar": "default.jpg",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user_site",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$b46xxKMQxLkMInV1Ali4Nl$Y8bLStK4nJ276BmHrlKyoEhbhK7grAo0oTl/dB6iWUs=",
+      "last_login": "2024-09-12T13:29:42.166Z",
+      "is_superuser": false,
+      "username": "Pierre",
+      "first_name": "",
+      "last_name": "",
+      "email": "pierre@pierre.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-12T13:29:37.618Z",
+      "nickname": "PierroLeBGdu32",
+      "created_at": "2024-09-12T13:29:37.618Z",
+      "status": "online",
+      "avatar": "default.jpg",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user_site",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$31x3E9gkMYg37JV5CXD1a8$5FUPf9EkQWE1WHKNgWegBxJUOy1HapEovNN+0rWrMnY=",
+      "last_login": "2024-09-12T13:29:42.166Z",
+      "is_superuser": false,
+      "username": "Henry",
+      "first_name": "",
+      "last_name": "",
+      "email": "Henry@Henry.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-12T13:29:37.618Z",
+      "nickname": "Henrygater",
+      "created_at": "2024-09-12T13:29:37.618Z",
+      "status": "online",
+      "avatar": "default.jpg",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.accessibility",
+    "pk": 1,
+    "fields": {
+      "language": "en",
+      "font_size": 2,
+      "dark_mode": false
+    }
+  },
+  {
+    "model": "api.accessibility",
+    "pk": 2,
+    "fields": {
+      "language": "en",
+      "font_size": 2,
+      "dark_mode": false
+    }
+  },
+  {
+    "model": "api.accessibility",
+    "pk": 3,
+    "fields": {
+      "language": "en",
+      "font_size": 2,
+      "dark_mode": false
+    }
+  },
+  {
+    "model": "api.stats_user",
+    "pk": 1,
+    "fields": {
+      "nb_games": 0,
+      "nb_wins": 0,
+      "nb_losses": 0,
+      "nb_point_taken": 0,
+      "nb_point_given": 0,
+      "win_rate": 0.0
+    }
+  },
+  {
+    "model": "api.stats_user",
+    "pk": 2,
+    "fields": {
+      "nb_games": 0,
+      "nb_wins": 0,
+      "nb_losses": 0,
+      "nb_point_taken": 0,
+      "nb_point_given": 0,
+      "win_rate": 0.0
+    }
+  },
+  {
+    "model": "api.stats_user",
+    "pk": 3,
+    "fields": {
+      "nb_games": 0,
+      "nb_wins": 0,
+      "nb_losses": 0,
+      "nb_point_taken": 0,
+      "nb_point_given": 0,
+      "win_rate": 0.0
+    }
+  }
+]

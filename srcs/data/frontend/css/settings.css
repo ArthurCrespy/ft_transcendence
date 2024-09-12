@@ -1,3 +1,6 @@
+
+
+
 .settings-container {
 	display: flex;
 	flex-direction: column;
@@ -39,7 +42,7 @@
 .cardTitlewidget {
 	color: #012970;
 	font-weight: 800;
-    font-size: 20px;
+	font-size: 20px;
 	display: flex;
 	justify-content: flex-start;
 	border: none;
