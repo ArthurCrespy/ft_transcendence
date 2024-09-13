@@ -4,7 +4,7 @@ import { notFoundView } from './views/404.js';
 import { friendsView } from './views/friends.js';
 
 // FR
-import { homeView } from './views/home_save.js';
+import { homeView } from './views/home.js';
 import { registerView } from './views/fr/register.js';
 import { loginView } from './views/fr/login.js';
 import { settingsView } from './views/fr/settings.js';

@@ -1,0 +1,245 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+
+
+
+body {
+    background: #002C54;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.base {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limite la largeur du conteneur */
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.TitleSite {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 20px; /* Moins d'espace pour rapprocher les boutons */
+}
+
+.ButtonLogin2 {
+    background: #2e567a;
+    border-radius: 30px;
+    width: 100%;
+    height: 96px;
+    max-width: 300px;
+    box-shadow: 5px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: height 0.5s ease; /* Animation d'agrandissement */
+    overflow: hidden;
+    z-index: 2; /* S'assurer que le bouton passe au-dessus du bouton Register */
+    position: relative; /* Positionnement relatif par défaut */
+}
+
+.buttonForm:hover {
+    background: #2e567a;
+}
+.ButtonLogin2:active {
+    --bs-btn-active-bg: #2e567a;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.expanded {
+    height: 400px; /* Hauteur agrandie quand le bouton est cliqué */
+    transition: height 0.3s ease;
+    position: relative;
+    z-index: 2; /* Garder au-dessus du bouton Register */
+    background: #2e567a;
+}
+
+.loginText {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    position: absolute;
+    /*top: 20px;*/
+    /* Déplace légèrement vers le haut lorsque le formulaire est se ferme */
+}
+
+.expanded .loginText {
+    top: 10px; /* Déplace légèrement vers le haut lorsque le formulaire est ouvert */
+}
+
+.loginForm {
+    display: none; /* Cacher le formulaire par défaut */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 110px; /* Positionner le formulaire en-dessous du texte "Login" */
+    width: 100%;
+    background-color: #2e567a; /* Assurer que le fond reste visible */
+    opacity: 0; /* Transparence pour le fade-in */
+    z-index: 3; /* Le formulaire doit être au-dessus du bouton Register */
+}
+
+.expanded .loginForm {
+    display: flex; /* Afficher le formulaire quand la classe expanded est active */
+    opacity: 1; /* Fade-in effect */
+    transition: opacity 0.5s ease; /* Animation de fade-in */
+}
+
+.login-input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+}
+
+.submit-btn, .connect-42-btn {
+    width: 90%;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.connect-42-btn {
+    background: #2e567a;
+    color: white;
+}
+
+/* Ajustement pour le bouton Register */
+.ButtonRegister2 {
+    background: #2e567a;
+    border-radius: 30px;
+    width: 100%;
+    height: 96px;
+    max-width: 300px;
+    box-shadow: 5px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Espace de 20px sous le bouton Login */
+    position: relative; /* Le bouton Register reste à sa place */
+    z-index: 1; /* Z-index inférieur au bouton Login et formulaire */
+}
+
+.registerText {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    position: absolute;
+    top: 20px;
+    transition: top 0.5s ease;
+}
+
+/* Pour éviter la réduction du bouton Login lorsqu'on clique dans le formulaire */
+.ButtonLogin2 input:focus {
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#language {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 9px;
+}
+
+/*.languageLabel {*/
+/*    color: #012970;*/
+/*}*/
+
+/*NAVBAR*/
+
+.navbar /*don t change the height */
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.40);
+}
+
+
+/*.navbar-brand {*/
+/*    !* padding: 5px;*/
+/*    width: 10px; *!*/
+/*    color: #012970;*/
+/*}*/
+
+/*.nav-icon {*/
+/*    width: 50%;*/
+/*    display: flex;*/
+/*    justify-content: space-evenly;*/
+/*    align-items: center;*/
+/*    color: #012970;*/
+/*}*/
+
+/* .nav-icon:hover {
+    color: #2759af;
+}
+
+/*Livia */
+
+#error404 {
+    width: 50%;
+    height: 50%;
+}
+
+.user-connected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* padding: 20px; */
+    box-sizing: 0;
+}
+
