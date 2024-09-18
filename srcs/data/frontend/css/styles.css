@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* display: flex;justify-content: center; */
+    display: flex;justify-content: center; */
     /* align-items: center; */ /*a remettre*/
 }
 
@@ -150,9 +150,3 @@ body {
     box-shadow: #435574 0px 4px 12px;
 }
 
-/*Livia */
-
-#error404 {
-	width: 50%;
-	height: 50%;
-}

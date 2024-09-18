@@ -30,7 +30,7 @@ export function homeView(container) {
 
     ///////////////////////////////////////////////////////////////
 
-    // Modal-Login
+    //Modal-Login
     const modal = document.createElement('div');
     modal.className = 'modal ModalLoginBase';
     modal.style.display = 'none'; // Cachée par défaut

@@ -132,7 +132,7 @@ button.buttonLogOut:active {
     cursor: pointer;
 }
 
-#example-font-size {
+/* #example-font-size {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -150,4 +150,4 @@ button.buttonLogOut:active {
 
 .ButtonLogOut:hover {
 	background-color: #df5462;
-}
+} */

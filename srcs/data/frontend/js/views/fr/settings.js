@@ -3,7 +3,6 @@ import { DEBUG, navigateTo } from '../../app.js';
 import { navigationBar } from './navigation.js';
 
 export function settingsView(container) {
-    container.classList.add('settings-container');
     container.innerHTML = '';
 
     // Récupérer les infos de l'utilisateur depuis le backend
@@ -445,9 +444,10 @@ export function settingsView(container) {
         modalParamModifyBody.appendChild(formModify2);
 
 
+//         buttonModifs.appendChild(svgpersonalInfoIcon);
 
-    const PoliceContener = document.createElement('div');
-    PoliceContener.className = 'PoliceContener';
+//         const personalInfoBody = document.createElement('div');
+//         personalInfoBody.className = 'card-body cardBodywidget';
 
     AccessibilityForm.appendChild(PoliceContener);
     // Champ de la taille de la police
@@ -486,9 +486,13 @@ export function settingsView(container) {
 //     const LanguageContenerSettings = document.createElement('div');
 //     LanguageContenerSettings.className = 'LanguageContenerSettings';
 
+//         const fontSizeItem = document.createElement('li');
+//         fontSizeItem.className = 'list-group-item cardBodyElemProfile';
+//         fontSizeItem.textContent = `Taille de la police: ${userData.font_size}`;
 
-    const LanguageContenerSettings = document.createElement('div');
-    LanguageContenerSettings.className = 'LanguageContenerSettings';
+//         const darkModeItem = document.createElement('li');
+//         darkModeItem.className = 'list-group-item cardBodyElemProfile';
+//         darkModeItem.textContent = `Mode sombre: ${userData.theme ? 'Activé' : 'Désactivé'}`;
 
     accessibilityBody.appendChild(LanguageContenerSettings);
     // accessibilityBody.appendChild(LanguageContenerSettings);
@@ -544,43 +548,79 @@ export function settingsView(container) {
 //     accessSubmitButton.textContent = 'Enregistrer les modifications';
 
 //     // Gestion de la soumission du formulaire
-    accessSubmitButton.addEventListener('submit', async (event) => {
-        event.preventDefault();
+//     form.addEventListener('submit', async (event) => {
+//         event.preventDefault(); // Empêche la soumission par défaut du formulaire
 
-        // Suppression des messages précédents
-        const errorMessages = AccessibilityForm.querySelectorAll('.text-danger');
-        errorMessages.forEach(message => message.remove());
-        // const successMessages = AccessibilityForm.querySelectorAll('.text-success');
-        // successMessages.forEach(message => message.remove());
+//         // Suppression des messages précédents
+//         const errorMessages = avatarForm.querySelectorAll('.text-danger');
+//         errorMessages.forEach(message => message.remove());
+//         const successMessages = AccessibilityForm.querySelectorAll('.text-success');
+//         successMessages.forEach(message => message.remove());
 
-        // Récupération des données du formulaire
-        const data = new FormData(AccessibilityForm);
-        const font_size = data.get('font-size');
-        const language = data.get('language');
-        const dark_mode = data.get('dark-mode');
+//         // Récupération des données du formulaire
+//         const data = new FormData(form);
+//         const nickname = data.get('newNickname');
+//         const email = data.get('newEmail');
 
-        // Envoi des données au serveur
-        const response = await fetch('/api/updateAccessibility/', {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'),
-            },
-            body: JSON.stringify({ font_size, language, dark_mode })
-        })
-        .catch((error) => {
-            const errorMessage = document.createElement('p');
-            errorMessage.className = 'text-danger';
-            errorMessage.textContent = 'Erreur lors de la modification des paramètres';
-            AccessibilityForm.insertBefore(errorMessage, accessSubmitButton);
-            // console.error('Error:', error);
-        });
-        if (response.ok) {
-            event.preventDefault();
-            navigateTo('/settings');
-        }
-    })
+//         // Envoi des données au serveur
+//         const response = await fetch('/api/updateSettings/', {
+//             method: 'PUT',
+//             headers: {
+//                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
+//                 'Content-Type': 'application/json',
+//                 'X-CSRFToken': getCookie('csrftoken'),
+//             },
+//             body: JSON.stringify({ nickname, email })
+//         });
+//         if (response.ok) {
+//             form.innerHTML = '';
+//             // const successMessage = document.createElement('p');
+//             // successMessage.className = 'text-success';
+//             // successMessage.textContent = 'Paramètres modifiés avec succès';
+//             // form.appendChild(successMessage);
+//             navigateTo('/settings');
+//         } else {
+//             const errorMessage = document.createElement('p');
+//             errorMessage.className = 'text-danger';
+//             errorMessage.textContent = 'Erreur lors de la modification des paramètres';
+//             form.insertBefore(errorMessage, submitButton);
+//         }
+//     })
+
+//     // Ajout des éléments au DOM
+//     settingsDiv.appendChild(settingsHeader);
+//     settingsDiv.appendChild(settingsBody);
+//     settingsBody.appendChild(form);
+//     form.appendChild(newNicknameLabel);
+//     form.appendChild(newNickname);
+//     form.appendChild(newEmailLabel);
+//     form.appendChild(newEmail);
+//     form.appendChild(submitButton);
+//     container.appendChild(settingsDiv);
+// // *************** Fin de modification des paramètres ***************
+
+// // *************** Modification de l'avatar ***************
+//     const avatarDiv = document.createElement('div');
+//     avatarDiv.className = 'card mb-4';
+
+//     const avatarHeader = document.createElement('div');
+//     avatarHeader.className = 'card-header cardTitleModifs';
+//     avatarHeader.textContent = 'Modifier l\'avatar';
+
+//     const avatarBody = document.createElement('div');
+//     avatarBody.className = 'card-body';
+
+//     // Formulaire de modification de l'avatar
+//     const avatarForm = document.createElement('form');
+//     avatarForm.className = 'w-100';
+
+//     // Creation du champ de saisie pour l'avatar
+//     const newAvatar = document.createElement('input');
+//     newAvatar.for = 'avatar';
+//     newAvatar.type = 'file';
+//     newAvatar.id = 'avatar';
+//     newAvatar.name = 'newAvatar';
+//     newAvatar.className = 'form-control mb-4';
 
     });
 }
