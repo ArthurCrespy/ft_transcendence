@@ -47,6 +47,7 @@ const routes = {
     '/friends': {
         title: 'Friends',
         view: friendsView,
+        '/chat': chatView,
     },
     '/pong': {
         title: 'Pong',
@@ -57,7 +58,7 @@ const routes = {
 async function router() {
     const pageTitle = "Transcendence";
     let path = location.pathname;
-    
+
     if (ChatWS) {ChatWS.close();}
 
     // Vérifier si l'URL correspond au modèle /user/:nickname

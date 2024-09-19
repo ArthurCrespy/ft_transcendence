@@ -1,3 +1,4 @@
+import { getCookie } from '../utils.js';
 import { navigateTo } from '../../app.js';
 import { getCookie } from '../utils.js';
 //import { navigationBar } from './navigation.js';
@@ -6,72 +7,112 @@ import { getCookie } from '../utils.js';
 export function navigationBar(container) {
     container.innerHTML = '';
 
-    // Creation d'une barre de navigation
-    const nav = document.createElement('nav');
-    nav.className = 'navbar fixed-top bg-body-tertiary';
-    container.appendChild(nav);
+    // Recuperer les infos de l'utilisateur dans le backend
+    fetch(`/api/settings/`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+    })
+        // Si le status de la reponse est 200, on recupere les donnees sinon on lance une erreur ou on redirige vers la page de connexion
+        // Si le status est 307 sans passer dans le bloc de donnees
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else if (response.status === 307) {
+                localStorage.removeItem('token');
+                fetch('/api/logout/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                }).then(r => r.json())
+                navigateTo('/login');
+                return null;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        })
+        .then(data => {
+            if (!data) {
+                return;
+            }
+            const userData = {
+                username: data.username,
+                nickname: data.nickname,
+                email: data.email,
+                language: data.language,
+                font_size: data.font_size,
+                theme: data.dark_mode,
+                avatar: data.avatar,
+            }
 
-    const containerFluid = document.createElement('div');
-    containerFluid.className = 'container-fluid';
-    nav.appendChild(containerFluid);
+            const nav = document.createElement('nav');
+            nav.className = 'nav fixed-left';
+            container.appendChild(nav);
 
-    // Creation d'un bouton pour le menu
-    const aHome = document.createElement('a');
-    aHome.className = 'navbar-brand';
-    containerFluid.appendChild(aHome);
 
-    const svgHome = document.createElement('svg');
-    svgHome.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svgHome.setAttribute('width', '30');
-    svgHome.setAttribute('height', '24');
-    svgHome.setAttribute('fill', 'currentColor');
-    svgHome.setAttribute('class', 'bi bi-house-door-fill');
-    svgHome.setAttribute('viewBox', '0 0 16 16');
-    aHome.appendChild(svgHome);
-    aHome.addEventListener('click', (event) => {
-        event.preventDefault();
-        navigateTo('/');
-    });
+            const divProfil = document.createElement('div');
+            divProfil.className = 'divProfil';
+            nav.appendChild(divProfil);
 
-    const path = document.createElement('path');
-    path.setAttribute('d', 'M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5');
-    svgHome.appendChild(path);
+            const avatarItem = document.createElement('div');
+            avatarItem.className = 'list-group-item imgAvatarContener';
 
-    // Creation d'un div pour les icones
-    const div = document.createElement('div');
-    div.className = 'nav-icon';
-    containerFluid.appendChild(div);
+            const avatarImage = document.createElement('img');
+            avatarImage.src = `data:image/png;base64, ${userData.avatar}`;
+            avatarImage.className = 'img-fluid rounded-circle imgAvatarProfile';
+            avatarImage.alt = 'Avatar';
+            divProfil.appendChild(avatarItem);
+            avatarItem.appendChild(avatarImage);
 
-    // Creation d'un bouton pour les jeux
-    const aGame = document.createElement('a');
-    aGame.className = 'navbar-brand';
-    div.appendChild(aGame);
+            const TitleNickname = document.createElement('h4');
+            TitleNickname.className = 'TitleNickname';
+            TitleNickname.textContent = `${userData.nickname}`;
+            divProfil.appendChild(TitleNickname);
 
-    const svgGame = document.createElement('svg');
-    svgGame.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svgGame.setAttribute('width', '30');
-    svgGame.setAttribute('height', '24');
-    svgGame.setAttribute('fill', 'currentColor');
-    svgGame.setAttribute('class', 'bi bi-controller');
-    svgGame.setAttribute('viewBox', '0 0 16 16');
-    aGame.appendChild(svgGame);
-    aGame.addEventListener('click', (event) => {
-        event.preventDefault();
-        navigateTo('/pong');
-    });
+            const divNav = document.createElement('div');
+            divNav.className = 'divNav';
+            nav.appendChild(divNav);
+            const NavBarList = document.createElement('ul');
+            NavBarList.className = 'NavBarList';
+            const PlayElem = document.createElement('li');
+            PlayElem.className = 'PlayElem';
+            PlayElem.textContent = 'Play';
+            const ChatElem  = document.createElement('li');
+            ChatElem.className = 'ElemListNavBar';
+            ChatElem.textContent = 'Chat';
+            const FriendsElem  = document.createElement('li');
+            FriendsElem.className = 'ElemListNavBar';
+            FriendsElem.textContent = 'Friends';
+            const LeaderboardElem  = document.createElement('li');
+            LeaderboardElem.className = 'ElemListNavBar';
+            LeaderboardElem.textContent = 'Leaderboard';
+            divNav.appendChild(NavBarList);
+            NavBarList.appendChild(PlayElem);
+            NavBarList.appendChild(ChatElem);
+            NavBarList.appendChild(FriendsElem);
+            NavBarList.appendChild(LeaderboardElem);
 
-    const path1 = document.createElement('path');
-    path1.setAttribute('d', 'M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1z');
-    svgGame.appendChild(path1);
+            const divListFriends = document.createElement('div');
+            divListFriends.className = 'divListFriends';
+            divListFriends.textContent = 'Friends list';
+            nav.appendChild(divListFriends);
 
-    const path2 = document.createElement('path');
-    path2.setAttribute('d', 'M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729q.211.136.373.297c.408.408.78 1.05 1.095 1.772.32.733.599 1.591.805 2.466s.34 1.78.364 2.606c.024.816-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773-.245-.232-.496-.526-.739-.808-.126-.148-.25-.292-.368-.423-.728-.804-1.597-1.527-3.224-1.527s-2.496.723-3.224 1.527c-.119.131-.242.275-.368.423-.243.282-.494.575-.739.808-.398.38-.877.706-1.513.773a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772a2.3 2.3 0 0 1 .433-.335l-.028-.079zm2.036.412c-.877.185-1.469.443-1.733.708-.276.276-.587.783-.885 1.465a14 14 0 0 0-.748 2.295 12.4 12.4 0 0 0-.339 2.406c-.022.755.062 1.368.243 1.776a.42.42 0 0 0 .426.24c.327-.034.61-.199.929-.502.212-.202.4-.423.615-.674.133-.156.276-.323.44-.504C4.861 9.969 5.978 9.027 8 9.027s3.139.942 3.965 1.855c.164.181.307.348.44.504.214.251.403.472.615.674.318.303.601.468.929.503a.42.42 0 0 0 .426-.241c.18-.408.265-1.02.243-1.776a12.4 12.4 0 0 0-.339-2.406 14 14 0 0 0-.748-2.295c-.298-.682-.61-1.19-.885-1.465-.264-.265-.856-.523-1.733-.708-.85-.179-1.877-.27-2.913-.27s-2.063.091-2.913.27');
-    svgGame.appendChild(path2);
-
-    // Creation d'un bouton pour les amis
-    const aFriend = document.createElement('a');
-    aFriend.className = 'navbar-brand';
-    div.appendChild(aFriend);
+            const divLogout = document.createElement('div');
+            divLogout.className = 'divLogout';
+            nav.appendChild(divLogout);
+            const buttonLogOut = document.createElement('button')
+            buttonLogOut.className = 'buttonLogOut';
+            // buttonLogOut.addEventListener('click', () => {
+            //     const mainSettingsDiv = document.querySelector('.main-settings-div');
+            //     mainSettingsDiv.style.display = 'flex';
+            // });
+            divLogout.appendChild(buttonLogOut);
 
     const svgFriend = document.createElement('svg');
     svgFriend.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -155,7 +196,7 @@ export function navigationBar(container) {
         event.preventDefault();
         navigateTo('/notifications');
     });
-    
+
 // TODO: Afficher lorsque l'utilisateur a des notifications
     // Création du compteur de notifications
     const countElement = document.createElement('span');
@@ -204,4 +245,5 @@ export function navigationBar(container) {
         event.preventDefault();
         navigateTo(`/friends/${input.value}`);
     });
+});
 }
