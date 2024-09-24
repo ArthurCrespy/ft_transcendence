@@ -1,6 +1,6 @@
 import { getCookie } from '../utils.js';
 import { navigateTo } from '../../app.js';
-import { getCookie } from '../utils.js';
+// import { getCookie } from '../utils.js';
 //import { navigationBar } from './navigation.js';
 
 
