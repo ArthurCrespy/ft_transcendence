@@ -28,7 +28,7 @@ export async function pongSoloView(container) {
      const navBarContainer = await navigationBar(container);
      div.appendChild(navBarContainer);
 
-	loadPongSoloCSS();  // CSS
+	// loadPongSoloCSS();  // CSS
 
     // HTML
     // const main = document.createElement('main');

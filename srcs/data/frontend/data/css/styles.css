@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
 }
 
 .page-with-nav {
@@ -11,6 +12,8 @@ html, body {
 main {
     height: 100%;
     width: 100%;
+    /* display: flex;
+    align-items: unset; */
 }
 
 
@@ -21,6 +24,7 @@ body {
     font-size: 16px;
     overflow-x: hidden;
 }
+
 body.small-font {
     font-size: 12px;
 }
@@ -31,7 +35,6 @@ body.large-font {
 .btn {
     font-size: inherit;
 }
-
 
 .PongDiv{
     display: flex;
