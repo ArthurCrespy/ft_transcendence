@@ -1,6 +1,10 @@
 import { DEBUG, navigateTo } from '../app.js';
 import wsManager from './wsManager.js';
-import {readNotification, decrementNotificationCount, removeNotification} from "./notifications.js";
+import {
+    readNotification,
+    decrementNotificationCount,
+    removeNotification,
+} from "./notifications.js";
 
 // Helper function to get CSRF token from cookies
 export function getCookie(name) {
@@ -191,6 +195,7 @@ export function displayToast(data) {
         accept_button.textContent = 'Accept';
         accept_button.addEventListener('click', () => {
             removeNotification(data.id);
+            decrementNotificationCount();
             wsManager.send({
                 type: 'accept_friend_request',
                 nickname: data.from_nickname,
@@ -204,6 +209,7 @@ export function displayToast(data) {
         reject_button.textContent = 'Reject';
         reject_button.addEventListener('click', () => {
             removeNotification(data.id);
+            decrementNotificationCount();
             wsManager.send({
                 type: 'reject_friend_request',
                 nickname: data.from_nickname,
@@ -264,7 +270,6 @@ export async function getAccessibility() {
                 const userData = {
                     language: data.language,
                     font_size: data.font_size,
-                    theme: data.dark_mode,
                 };
                 return userData;
             } else if (response.status === 307) {
@@ -298,7 +303,6 @@ export function applyAccessibilitySettings(userSettings) {
     if (!userSettings) {
         document.documentElement.setAttribute('lang', 'fr');
         bodyElement.style.fontSize = '16px';
-        document.body.classList.remove('dark-mode');
         return;
     }
     if (DEBUG) {console.log('User settings:', userSettings);}
@@ -321,12 +325,5 @@ export function applyAccessibilitySettings(userSettings) {
     // TODO: Apply the language
     if (userSettings.language) {
         document.documentElement.setAttribute('lang', userSettings.language);
-    }
-
-    // TODO: Apply the dark/light theme
-    if (userSettings.theme) {
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
     }
 }

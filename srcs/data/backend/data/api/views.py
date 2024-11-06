@@ -384,7 +384,6 @@ def get_settings(request):
                     'email': user.email,
                     'language': settings.language,
                     'font_size': settings.font_size,
-                    'dark_mode': settings.dark_mode,
                     'avatar': avatar}
             return JsonResponse(data, status=200)
         except Accessibility.DoesNotExist:
@@ -778,6 +777,8 @@ def create_user42(response, code):
             settings.save()
             stats = Stats_user(user=user)
             stats.save()
+            game_settings = Game_Settings(user=user)
+            game_settings.save()
         else:
             user = User_site.objects.get(username=username)
             user.set_password(code)
